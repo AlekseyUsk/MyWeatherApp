@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hfad.myweatherapp.model.*
 import com.hfad.myweatherapp.viewModel.AppState
+import kotlin.random.Random
 
 class WeatherListViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
@@ -39,11 +40,14 @@ class WeatherListViewModel(
     private fun sentRequest(location: Continents) {
         choiseRepository()
         liveData.value = AppState.Loading
-        if (false) {
-            liveData.postValue(AppState.Error(throw IllegalStateException("что то пошло не так")))
-        } else {
-            liveData.postValue(AppState.SuccessMany(repositoryMany.getWeatherList(location)))
-        }
+        Thread {
+            Thread.sleep(1000L)
+            if ((0..3).random(Random(System.currentTimeMillis())) == 1) {
+                liveData.postValue(AppState.Error(IllegalStateException("что то пошло не так")))
+            } else {
+                liveData.postValue(AppState.SuccessMany(repositoryMany.getWeatherList(location)))
+            }
+        }.start()
 
     }
 

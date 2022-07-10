@@ -1,4 +1,4 @@
-package com.hfad.myweatherapp.details
+package com.hfad.myweatherapp.view.weatherlist.details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,11 +11,6 @@ import com.hfad.myweatherapp.domain.Weather
 
 class FragmentDetails : Fragment() {
 
-//    companion object {
-//        fun newInstance(weather: Weather): FragmentDetails {
-//            return FragmentDetails()
-//        }
-//    }
 
     var isRussia = true
 
@@ -48,24 +43,26 @@ class FragmentDetails : Fragment() {
     }
 
     private fun renderData(weather: Weather) {
-
-        binding.cityName.text = weather.city.CityName
-        binding.temperatureValue.text = weather.temperature.toString()
-        binding.feelsLikeValue.text = weather.feelsLike.toString()
-        binding.cityCoordinates.text = "${weather.city.lat}/${weather.city.lon}"
+        with(binding) {
+            cityName.text = weather.city.CityName
+            temperatureValue.text = weather.temperature.toString()
+            feelsLikeValue.text = weather.feelsLike.toString()
+            cityCoordinates.text = "${weather.city.lat}/${weather.city.lon}"
+        }
     }
 
 
     companion object bundleExtra {  //ОШИБКА! companion  - Подчеркнуто крассным
         const val BUNDLE_WEATHER_EXTRA = "BUNDLE_WEATHER_EXTRA"
         fun newInstance(weather: Weather): FragmentDetails {
-            val bundle = Bundle()
-            bundle.putParcelable(BUNDLE_WEATHER_EXTRA, weather)
 
-            val fr = FragmentDetails()
-            fr.arguments = bundle
+            return FragmentDetails().apply {
+                arguments = Bundle().apply {
+                    this.putParcelable(BUNDLE_WEATHER_EXTRA, weather)
+                }
 
-            return fr
+            }
+
         }
     }
 

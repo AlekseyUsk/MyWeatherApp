@@ -1,4 +1,4 @@
-package com.hfad.myweatherapp.details
+package com.hfad.myweatherapp.view.weatherlist.details
 
 import com.hfad.myweatherapp.domain.Weather
 
