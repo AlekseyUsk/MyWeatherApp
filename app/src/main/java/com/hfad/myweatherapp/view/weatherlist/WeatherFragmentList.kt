@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.hfad.myweatherapp.MainActivity
 import com.hfad.myweatherapp.R
 import com.hfad.myweatherapp.databinding.FragmentWeatherListBinding
-import com.hfad.myweatherapp.details.FragmentDetails
-import com.hfad.myweatherapp.details.OnItemClick
+import com.hfad.myweatherapp.view.weatherlist.details.FragmentDetails
+import com.hfad.myweatherapp.view.weatherlist.details.OnItemClick
 import com.hfad.myweatherapp.domain.Weather
 import com.hfad.myweatherapp.viewModel.AppState
+import kotlinx.android.synthetic.main.fragment_weather_recycle_item.*
+import java.time.Duration
 
 class WeatherFragmentList : Fragment(), OnItemClick {
 
@@ -60,6 +63,8 @@ class WeatherFragmentList : Fragment(), OnItemClick {
 
         })
 
+        isRussia.apply { viewModel.getWeatherListForRussia() }
+
         binding.floatingBtn.setOnClickListener {
             isRussia = !isRussia
             if (isRussia) {
@@ -67,8 +72,8 @@ class WeatherFragmentList : Fragment(), OnItemClick {
             } else {
                 viewModel.getWeatherListForWorld()
             }
+            viewModel.getWeatherListForRussia()
         }
-        viewModel.getWeatherListForRussia()
     }
 
     private fun renderData(appState: AppState) {
@@ -87,11 +92,22 @@ class WeatherFragmentList : Fragment(), OnItemClick {
         }
     }
 
+    fun View.HW(string: String, duration: Int, actionString: String, block: (v: View) -> Unit) {
+        Snackbar.make(this, string, duration).setAction("подробно", block).show()
+    }
+
     override fun onItemClick(weather: Weather) {
-        (binding.root.context as MainActivity).supportFragmentManager.beginTransaction().hide(this)
-            .add(
-                R.id.container, FragmentDetails.newInstance(weather)
-            ).addToBackStack("addToBackStack").commit()
+        binding.root.HW(
+            "${weather.city.CityName} температура ${weather.temperature}",
+            Snackbar.LENGTH_LONG,
+            "подробно"
+        ) {
+            (binding.root.context as MainActivity).supportFragmentManager.beginTransaction()
+                .hide(this)
+                .add(
+                    R.id.container, FragmentDetails.newInstance(weather)
+                ).addToBackStack("addToBackStack").commit()
+
+        }
     }
 }
-
