@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-        // binding.text.text = "сменил текст при помощи binding"
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

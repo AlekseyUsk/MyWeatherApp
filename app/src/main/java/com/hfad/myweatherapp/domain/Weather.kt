@@ -8,7 +8,7 @@ data class Weather(
 
     val city: City = getDefaultCity(),
     var temperature: Int = 0,     // температура
-    val feelsLike: Int = 0 // ощущается как
+    var feelsLike: Int = 0 // ощущается как
 
 ) : Parcelable
 
