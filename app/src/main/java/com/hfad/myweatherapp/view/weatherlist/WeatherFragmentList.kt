@@ -15,8 +15,6 @@ import com.hfad.myweatherapp.view.weatherlist.details.FragmentDetails
 import com.hfad.myweatherapp.view.weatherlist.details.OnItemClick
 import com.hfad.myweatherapp.domain.Weather
 import com.hfad.myweatherapp.viewModel.AppState
-import kotlinx.android.synthetic.main.fragment_weather_recycle_item.*
-import java.time.Duration
 
 class WeatherFragmentList : Fragment(), OnItemClick {
 
@@ -38,8 +36,6 @@ class WeatherFragmentList : Fragment(), OnItemClick {
         super.onDestroy()
         _binding = null
     }
-
-    // lateinit var binding: FragmentWeatherListBinding
     lateinit var viewModel: WeatherListViewModel
 
     override fun onCreateView(
@@ -98,7 +94,7 @@ class WeatherFragmentList : Fragment(), OnItemClick {
 
     override fun onItemClick(weather: Weather) {
         binding.root.HW(
-            "${weather.city.CityName} температура ${weather.temperature}",
+            "${weather.city.CityName} ",
             Snackbar.LENGTH_LONG,
             "подробно"
         ) {
