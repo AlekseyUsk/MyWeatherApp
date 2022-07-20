@@ -11,7 +11,7 @@ data class Fact(
     @SerializedName("daytime")
     val daytime: String,
     @SerializedName("feels_like")
-    val feelsLike: Int,
+    val feelsLike: Double,
     @SerializedName("humidity")
     val humidity: Int,
     @SerializedName("icon")
@@ -37,7 +37,7 @@ data class Fact(
     @SerializedName("source")
     val source: String,
     @SerializedName("temp")
-    val temp: Int,
+    val temp: Double,
     @SerializedName("temp_water")
     val tempWater: Int,
     @SerializedName("uptime")
@@ -49,5 +49,5 @@ data class Fact(
     @SerializedName("wind_gust")
     val windGust: Double,
     @SerializedName("wind_speed")
-    val windSpeed: Int
+    val windSpeed: Double
 )

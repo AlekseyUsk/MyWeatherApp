@@ -41,7 +41,7 @@ class WeatherListViewModel(
         choiseRepository()
         liveData.value = AppState.Loading
         Thread {
-            Thread.sleep(10L)
+            Thread.sleep(1000L)
             if ((0..3).random(Random(System.currentTimeMillis())) == 1) {
                 liveData.postValue(AppState.Error(IllegalStateException("что то пошло не так")))
             } else {

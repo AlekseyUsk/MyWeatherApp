@@ -3,7 +3,7 @@ package com.hfad.myweatherapp.model.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class WeatherDOT(
+data class WeatherDTO(
     @SerializedName("fact")
     val fact: Fact,
     @SerializedName("info")
